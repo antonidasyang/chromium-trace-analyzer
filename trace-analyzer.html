@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>trace-analyzer</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="trace-analyzer.js"></script>
+        <style type="text/css">
+            .row {
+                border-left: 1px solid #eee;
+                border-top: 1px solid #eee;
+            }
+            [class*='col-'] {
+               padding: 3px;
+               border-right: 1px solid #eee;
+               border-bottom: 1px solid #eee;
+            }
+         </style>
+    </head>
+    <body>
+        <div id="events_list_app" class="container">
+            <div class="row" style="line-height: 38px">
+                <div class="col-sm-2">pid: <input id="pid_all" type="checkbox">all<br>
+                    <template v-for="item in pid">
+                        <input name="pid" type="checkbox" :value="item">{{ item }}
+                    </template>
+                </div>
+                <!-- div class="col-sm-2">tid:
+                    <template v-for="item in tid">
+                        <input name="tid" type="checkbox" :value="item">{{ item }}
+                    </template>
+                </div -->
+                <!-- div class="col-sm-3">ph:
+                    <template v-for="item in ph">
+                        <input name="ph" type="checkbox" :value="item">{{ item }}
+                    </template>
+                </div -->
+                <div class="col-sm-9">cat: <input id="cat_all" type="checkbox">all<br>
+                    <template v-for="item in cat">
+                        <input name="cat" type="checkbox" :value="item">{{ item }}
+                    </template>
+                </div>
+                <div class="col-sm"><button id="filter" type="button" class="btn btn-primary">Filter</button></div>
+            </div>
+            Total Events: {{ events.length }}
+            <table class="table table-bordered">
+                <tr>
+                    <td>pid</td>
+                    <!-- div class="col-sm">tid</div>
+                    <div class="col-sm">ts</div -->
+                    <td>ph</td>
+                    <td>cat</td>
+                    <td>name</td>
+                    <td>args</td>
+                </tr>
+                <tr v-for="(item, index) in events">
+                    <td>{{ item.pid }}</td>
+                    <!-- div class="col-sm">{{ item.tid }}</div>
+                    <div class="col-sm">{{ item.ts }}</div -->
+                    <td>{{ item.ph }}</td>
+                    <td>{{ item.cat }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.args }}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
